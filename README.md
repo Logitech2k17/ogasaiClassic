@@ -6,4 +6,4 @@ https://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-emulator-se
 Requirements
 - Map Files : https://mega.nz/#!g0U2xI4a!aoJICAY34DLvM...Xz4J3rg9dM
 - Visual C++ Redistributable for Visual Studio 2015 : https://www.microsoft.com/en-us/download/details.aspx?id=48145
-- Visual C++ Redistributable for Visual Studio 2015 : https://www.microsoft.com/en-us/download/details.aspx?id=35
+- DirectX End-User Runtime : https://www.microsoft.com/en-us/download/details.aspx?id=35

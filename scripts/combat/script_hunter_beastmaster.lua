@@ -1,5 +1,6 @@
 script_hunter = {
 	message = 'Beastmaster - Hunter Combat Script',
+	hunterExtra = include("scripts\\combat\\script_hunterEX.lua"),
 	drinkMana = 50,
 	eatHealth = 50,
 	potionHealth = 10,
@@ -8,6 +9,8 @@ script_hunter = {
 	waitTimer = 0,
 	hasPet = true,
 	bagWithPetFood = 4,
+	slotWithPetFood = GetContainerNumSlots(3), -- last slot in the bag
+	foodName = 'PET FOOD NAME',
 	stopWhenNoPetFood = true,
 	quiverBagNr = 5,
 	ammoIsArrow = true,
@@ -38,13 +41,6 @@ function script_hunter:setup()
 		self.ammoName = itemName;
 	end
 
-	if (GetContainerItemLink(self.quiverBagNr-1, 1)  ~= nil) then
-		_,_,itemLink = string.find(GetContainerItemLink(self.quiverBagNr-1, 1),"(item:%d+)");
-		itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType,
-   		itemStackCount, itemEquipLoc, itemTexture, itemSellPrice = GetItemInfo(itemLink);
-		self.ammoName = itemName;
-	end
-
 	DEFAULT_CHAT_FRAME:AddMessage('script_hunter: Ammo name is set to: "' .. self.ammoName .. '" ...');
 	if (not strfind(itemName, "Arrow")) then
 		DEFAULT_CHAT_FRAME:AddMessage('script_hunter: Ammo will be bought at "Bullet" vendors...');
@@ -56,6 +52,17 @@ function script_hunter:setup()
 		script_vendor.ammoName = itemName;
 		self.ammoIsArrow = true;
 	end	
+
+	-- Save the name of pet food we use
+	if (GetContainerItemLink(self.bagWithPetFood-1, self.slotWithPetFood)  ~= nil) then
+		local _, _, iLink = string.find(GetContainerItemLink(self.bagWithPetFood-1, self.slotWithPetFood), "(item:%d+)");
+		local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType,
+   		itemStackCount, itemEquipLoc, itemTexture = GetItemInfo(iLink);
+		self.foodName = itemName;
+		DEFAULT_CHAT_FRAME:AddMessage('script_hunter: Pet food name is set to: "' .. self.foodName .. '" ...');
+	else
+		DEFAULT_CHAT_FRAME:AddMessage('script_hunter: Please set the pet food name in hunter options...');
+	end
 
 	if (GetLocalPlayer():GetLevel() < 3) then
 		self.buyWhenQuiverEmpty = false;
@@ -121,7 +128,6 @@ function script_hunter:runBackwards(targetObj, range)
 end
 
 function script_hunter:draw()
-	--script_hunter:window();
 	local tX, tY, onScreen = WorldToScreen(GetLocalPlayer():GetPosition());
 	if (onScreen) then
 		DrawText(self.message, tX+75, tY+40, 0, 255, 255);
@@ -170,7 +176,7 @@ function script_hunter:run(targetGUID)
 	end
 
 	if (self.hasPet and not IsInCombat()) then
-		if (script_hunter:petChecks()) then
+		if (script_hunterEX:petChecks()) then
 			return 0;
 		end
 	end
@@ -193,7 +199,7 @@ function script_hunter:run(targetGUID)
 			StopMoving();
 		end
 
-		script_hunter:chooseAspect(targetObj);
+		script_hunterEX:chooseAspect(targetObj);
 
 		targetHealth = targetObj:GetHealthPercentage();
 
@@ -302,11 +308,6 @@ function script_hunter:doOpenerRoutine(targetGUID, pet)
 	local targetObj = GetGUIDObject(targetGUID);
 	self.message = "Pulling " .. targetObj:GetUnitName() .. "...";
 
-	-- Mark the target with Hunter's Mark
-	if (HasSpell("Hunter's Mark") and not targetObj:HasDebuff("Hunter's Mark") and not IsSpellOnCD("Hunter's Mark") and targetObj:GetDistance() < 50) then
-		script_hunter:cast("Hunter's Mark", targetObj); 
-	end
-	
 	-- Let pet loose early to get aggro (even before we are in range ourselves)
 	if (self.hasPet and targetObj:GetDistance() < 50) then 
 		if (pet:GetUnitsTarget() ~= nil and pet:GetUnitsTarget() ~= 0) then
@@ -657,11 +658,14 @@ function script_hunter:rest()
 		end
 	end
 
+	-- Check pet food, change bag and/or slot if the stack ran out
+	script_hunterEX:checkPetFood();
+
 	-- Pet checks
-	if (script_hunter:petChecks()) then return true; end
+	if (script_hunterEX:petChecks()) then return true; end
 
 	-- Aspect check
-	if (not IsMounted()) then if (script_hunter:chooseAspect(script_grind:getTarget())) then return false; end end
+	if (not IsMounted()) then if (script_hunterEX:chooseAspect(script_grind:getTarget())) then return false; end end
 
 	-- No rest / buff needed
 	return false;
@@ -681,148 +685,6 @@ function script_hunter:mount()
 	end
 	
 	return false;
-end
-
-function script_hunter:chooseAspect(targetObj)
-	local localObj = GetLocalPlayer();
-	if (not IsStanding()) then return false; end
-	hasHawk, hasMonkey, hasCheetah = HasSpell("Aspect of the Hawk"), HasSpell("Aspect of the Monkey"), HasSpell("Aspect of the Cheetah");
-	if (hasMonkey and localObj:GetLevel() < 10) then 
-		if (not localObj:HasBuff('Aspect of the Monkey')) then  
-			CastSpellByName('Aspect of the Monkey'); 
-			return true; 
-		end	
-	elseif (hasMonkey and (targetObj ~= nil and not targetObj ~= 0)) then
-		if (targetObj:GetDistance() < 5 and IsInCombat()) then
-			if (not localObj:HasBuff('Aspect of the Monkey')) then  
-				CastSpellByName('Aspect of the Monkey'); 
-				return true; 
-			end
-		else
-			if (hasHawk and IsInCombat()) then 
-				if (not localObj:HasBuff('Aspect of the Hawk')) then 
-					CastSpellByName('Aspect of the Hawk'); 
-					return true; 
-				end 
-			end
-		end
-	elseif (hasCheetah and not IsInCombat() and targetObj == nil) then 
-		if (not localObj:HasBuff('Aspect of the Cheetah')) then 
-			CastSpellByName('Aspect of the Cheetah'); 
-			return true;  
-		end 
-	end
-	return false;
-end
-
-function script_hunter:petChecks()
-	local localObj = GetLocalPlayer();
-	local localMana = localObj:GetManaPercentage();
-	local pet = GetPet();
-	local petHP = 0;
-	if (pet ~= nil and pet ~= 0) then
-		petHP = pet:GetHealthPercentage();
-	end
-
-	if (self.hasPet) then if (localObj:GetLevel() < 10) then self.hasPet = false; end end
-
-	-- Check: If pet is dismissed then Call pet 
-	if (GetPet() == 0 and self.hasPet) then
-		self.message = "Pet is missing, calling pet...";
-		if (IsMoving() or not IsStanding()) then StopMoving(); end
-		CastSpellByName('Call Pet'); 
-		self.waitTimer = GetTimeEX() + 1850;
-		return true;
-	end
-
-	-- Check: If pet is dead, then revive pet
-	if (self.hasPet and GetPet():IsDead() and not IsInCombat() and HasSpell("Revive Pet")) then	
-		self.message = "Pet is dead, reviving pet...";
-		if (IsMoving() or not IsStanding()) then 
-			StopMoving(); 
-			return true; 
-		end
-		if (localMana > 60) then 
-			CastSpellByName('Revive Pet'); 
-			self.waitTimer = GetTimeEX() + 1850;
-			return true; 
-		else 
-			self.message = "Pet is dead, need more mana to ress it...";
-			return true; 
-		end
-	end
-
-	-- Check: Stop if we ran out of pet food in the "pet food slot"
-	if (self.stopWhenNoPetFood and self.hasPet and not IsInCombat()) then
-		local texture, itemCount, locked, quality, readable = GetContainerItemInfo(self.bagWithPetFood-1, GetContainerNumSlots(self.bagWithPetFood-1));
-		if (itemCount == nil) then
-			self.message = "No more pet food, stopping the bot..."; 
-			if (IsMoving() or not IsStanding()) then StopMoving(); return true; end
-			if (GetContainerItemCooldown(self.hsBag-1, self.hsSlot) == 0 and self.hsWhenStop) then 
-				UseItem('Hearthstone'); 
-				self.waitTimer = GetTimeEX() + 1850; 
-				return true; 
-			else 
-				Logout(); 
-				StopBot(); 
-				return true;  
-			end 
-		end
-	end
-
-	-- Check: If pet isn't happy, feed it 
-	if (petHP > 0 and self.hasPet) then	
-		local happiness, damagePercentage, loyaltyRate = GetPetHappiness();
-		if (not GetPet():IsDead() and self.feedTimer < GetTimeEX() and not IsInCombat()) then
-			if (happiness < 3 or loyaltyRate < 0) then
-				self.message = "Pet is not happy, feeding the pet...";
-				if (not IsStanding()) then StopMoving(); return true; end
-				CastSpellByName("Feed Pet"); 
-				TargetUnit("Pet"); 
-				PickupContainerItem(self.bagWithPetFood-1, GetContainerNumSlots(self.bagWithPetFood-1));
-				-- Set a 20 seconds timer for this check (Feed Pet duration)
-				self.feedTimer = GetTimeEX() + 20000; 
-				self.waitTimer = GetTimeEX() + 1850; 
-				return true;
-			end
-		end
-	end	
-
-	-- If we have the skill Mend Pet
-	local mendPet = HasSpell("Mend Pet");
-	if (mendPet) then
-		-- Check: Mend the pet if it has lower than 70% HP and out of combat
-		if (self.hasPet and petHP < 70 and petHP > 0 and not IsInCombat()) then
-			if (GetPet():GetDistance() > 8) then
-				PetFollow();
-				self.waitTimer = GetTimeEX() + 1850; 
-				return true;
-			end
-			if (GetPet():GetDistance() < 20 and localMana > 10) then
-				if (self.hasPet and petHP < 70 and not IsInCombat() and petHP > 0) then
-					self.message = "Pet has lower than 70% HP, mending pet...";
-					if (IsMoving() or not IsStanding()) then StopMoving(); return true; end
-					CastSpellByName('Mend Pet');
-					self.waitTimer = GetTimeEX() + 1850; 
-					return true;
-				end
-			end
-		end
-	end
-	return false;
-end
-
-function script_hunter:window()
-
-	if (self.isChecked) then
-	
-		--Close existing Window
-		EndWindow();
-
-		if(NewWindow("Class Combat Options", 200, 200)) then
-			script_hunter:menu();
-		end
-	end
 end
 
 function script_hunter:menu()
@@ -845,6 +707,10 @@ function script_hunter:menu()
 		wasClicked, self.buyWhenQuiverEmpty = Checkbox("Buy ammo when only 1 stack left.", self.buyWhenQuiverEmpty);	
 		Text("Bag# with pet food (2-5)");
 		self.bagWithPetFood = InputText("BPF", self.bagWithPetFood);
+		Text("Bagslot# with pet food (1-Maxslot)");
+		self.slotWithPetFood = InputText("SPF", self.slotWithPetFood);
+		Text("Pet Food Name:");
+		self.foodName = InputText("PFN", self.foodName);
 		Text('Always put the pet food in the last slot of the bag.');
 		Separator();
 		self.quiverBagNr = InputText("Bag# for quiver (2-5)", self.quiverBagNr);

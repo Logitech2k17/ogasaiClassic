@@ -25,11 +25,6 @@ function script_grindEX:doChecks()
 		if (not LoadNavmesh()) then script_grind.message = "Make sure you have mmaps-files..."; return true; end
 		if (GetLoadNavmeshProgress() ~= 1) then script_grind.message = "Loading the nav mesh... " return true; end
 
-		if (not script_unstuck:pathClearAuto(2)) then
-			script_unstuck:unstuck();
-			return true;
-		end
-
 		if(localObj:IsDead()) then
 			script_grind.waitTimer = GetTimeEX() + 150;
 			script_grind.message = "Walking to corpse...";

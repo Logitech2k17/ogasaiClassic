@@ -81,6 +81,8 @@ function script_grindMenu:menu()
 			Text("Current walk path"); Text("E.g. paths\\1-5 Durotar.xml"); script_grind.pathName = InputText(' ', script_grind.pathName); Separator();
 			Text('Next node distance'); script_grind.nextToNodeDist = SliderFloat("ND (yd)", 1, 10, script_grind.nextToNodeDist); Separator();
 		end
+		wasClicked, script_grind.useUnstuck = Checkbox("Use Unstuck Feature (script_unstuck)", script_grind.useUnstuck);
+		Separator()
 		wasClicked, script_grind.safeRess = Checkbox("Try to ress on a safe spot", script_grind.safeRess);
 		Text('Ress corpse distance'); script_grind.ressDistance = SliderFloat("RD (yd)", 1, 35, script_grind.ressDistance); Separator();
 		Text("Script tick rate"); script_grind.tickRate = SliderFloat("TR (ms)", 0, 2000, script_grind.tickRate);

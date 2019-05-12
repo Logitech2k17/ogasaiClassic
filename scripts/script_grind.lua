@@ -81,7 +81,8 @@ script_grind = {
 	hotspotReached = false,
 	drawAggro = false,
 	safeRess = true,
-	skipHardPull = true
+	skipHardPull = true,
+	useUnstuck = true
 }
 
 function script_grind:setup()
@@ -150,6 +151,13 @@ function script_grind:run()
 
 	if (not self.navFunctionsLoaded) then self.message = "Error script_nav not loaded..."; return; end
 	if (not self.helperLoaded) then self.message = "Error script_helper not loaded..."; return; end
+
+	if (self.useUnstuck) then
+		if (not script_unstuck:pathClearAuto(2)) then
+			script_unstuck:unstuck();
+			return true;
+		end
+	end
 
 	if (self.pause) then self.message = "Paused by user..."; return; end
 

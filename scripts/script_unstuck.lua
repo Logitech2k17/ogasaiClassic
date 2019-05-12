@@ -135,8 +135,8 @@ end
 
 function script_unstuck:jumpObstacles()
 
-	if ( (script_unstuck:getObsMin(1) >= 0.2 and script_unstuck:getObsMax(1) < 2.2 and script_unstuck:getObsMax(1) > 1) or 
-		(script_unstuck:getObsMin(2) >= 0.2 and  script_unstuck:getObsMax(2) < 2.2 and script_unstuck:getObsMax(2) > 1) ) then
+	if ( (script_unstuck:getObsMin(1) >= 0.3 and script_unstuck:getObsMax(1) < 2.2 and script_unstuck:getObsMax(1) > 1) or 
+		(script_unstuck:getObsMin(2) >= 0.3 and  script_unstuck:getObsMax(2) < 2.2 and script_unstuck:getObsMax(2) > 1) ) then
 		self.message = "Jumping over obstacle";
 		JumpOrAscendStart();
 	end
@@ -158,17 +158,17 @@ function script_unstuck:pathClearAuto(yardsInfront)
 
 	_angle = GetLocalPlayer():GetAngle();	
 	
-	for i = 8, 15 do	
+	for i = 1, 2 do	
 
 		-- pos 1 - yardsInfront 
 		for y = 1, yardsInfront do
 			_xp, _yp, _zp = _lx+(y*math.cos(_angle)), _ly+(y*math.sin(_angle)), _lz;
-			_xpl, _ypl, _zpl = _lx+(y*math.cos(_angle-i*0.02)), _ly+(y*math.sin(_angle-i*0.02)), _lz;
-			_xpr, _ypr, _zpr = _lx+(y*math.cos(_angle+i*0.02)), _ly+(y*math.sin(_angle+i*0.02)), _lz;
+			_xpl, _ypl, _zpl = _lx+(y*math.cos(_angle-i*0.16)), _ly+(y*math.sin(_angle-i*0.16)), _lz;
+			_xpr, _ypr, _zpr = _lx+(y*math.cos(_angle+i*0.16)), _ly+(y*math.sin(_angle+i*0.16)), _lz;
 	
-			local hitM, _, _, _ = Raycast(_lx, _ly, _lz + (i*0.2),  _xp, _yp, _zp + (i*0.2));
-			local hitL, _, _, _ = Raycast(_lx, _ly, _lz + (i*0.2),  _xpl, _ypl, _zpl + (i*0.2));	
-			local hitR, _, _, _ = Raycast(_lx, _ly, _lz + (i*0.2),  _xpr, _ypr, _zpr + (i*0.2));
+			local hitM, _, _, _ = Raycast(_lx, _ly, _lz + (i*1.6),  _xp, _yp, _zp + (i*1.6));
+			local hitL, _, _, _ = Raycast(_lx, _ly, _lz + (i*1.6),  _xpl, _ypl, _zpl + (i*1.6));	
+			local hitR, _, _, _ = Raycast(_lx, _ly, _lz + (i*1.6),  _xpr, _ypr, _zpr + (i*1.6));
 
 			if(not hitM and not hitL) then
 				-- Path isn't clear

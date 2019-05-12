@@ -1,6 +1,7 @@
 # oGasai Scripts for WoW Classic
 
 Bot made by DarkLinux @ OwnedCore
+
 https://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-emulator-servers/wow-emu-programs/600785-ogasai-d-j-vu-wow-1-12-1-vanilla-bot.html
 
 Requirements

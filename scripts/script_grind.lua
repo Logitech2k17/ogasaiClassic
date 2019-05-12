@@ -154,7 +154,7 @@ function script_grind:run()
 	if (not self.navFunctionsLoaded) then self.message = "Error script_nav not loaded..."; return; end
 	if (not self.helperLoaded) then self.message = "Error script_helper not loaded..."; return; end
 
-	if (self.useUnstuck) then
+	if (self.useUnstuck and IsMoving()) then
 		if (not script_unstuck:pathClearAuto(2)) then
 			script_unstuck:unstuck();
 			return true;

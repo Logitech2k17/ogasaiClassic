@@ -229,26 +229,23 @@ function script_warlock:run(targetGUID)
 			-- Opener spell
 			if (hasPet) then PetAttack(); end
 			
-			if (HasSpell("Shadow Bolt")) then
-				if(not targetObj:IsSpellInRange('Shadow Bolt'))  then
-					return 3;
-				end
-				-- Dismount
-				if(IsMounted()) then DisMount(); end
-				-- In range:
-				if (HasSpell("Siphon Life")) then
-					if (Cast("Siphon Life", targetObj)) then self.waitTimer = GetTimeEX() + 1600; return 0; end
-				elseif (HasSpell("Curse of Agony")) then
-					if (Cast('Curse of Agony', targetObj)) then self.waitTimer = GetTimeEX() + 1600; return 0; end
-				elseif (HasSpell("Immolate")) then
-					if (Cast('Immolate', targetObj)) then self.waitTimer = GetTimeEX() + 2500; return 0; end
-				else
-					if (Cast('Shadow Bolt', targetObj)) then return 0; end
-					
-				end
-				-- Perhaps we are not in line of sight
-				if (not Cast('Shadow Bolt', targetObj)) then return 4; end
-			end	
+			if(not targetObj:IsSpellInRange('Shadow Bolt') or not targetObj:IsInLineOfSight())  then
+				return 3;
+			end
+
+			-- Dismount
+			if(IsMounted()) then DisMount(); end
+			-- In range:
+			if (HasSpell("Siphon Life")) then
+				if (Cast("Siphon Life", targetObj)) then self.waitTimer = GetTimeEX() + 1600; return 0; end
+			elseif (HasSpell("Curse of Agony")) then
+				if (Cast('Curse of Agony', targetObj)) then self.waitTimer = GetTimeEX() + 1600; return 0; end
+			elseif (HasSpell("Immolate")) then
+				if (Cast('Immolate', targetObj)) then self.waitTimer = GetTimeEX() + 2500; return 0; end
+			else
+				if (Cast('Shadow Bolt', targetObj)) then return 0; end
+			end
+	
 		-- Combat
 		else	
 			self.message = "Killing " .. targetObj:GetUnitName() .. "...";

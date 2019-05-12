@@ -96,7 +96,9 @@ function script_grind:setup()
 	-- No refill as mage or at level 1
 	if (strfind("Mage", class)) then self.vendorRefill = false; end
 
-	if (GetLocalPlayer():GetLevel() < 3) then self.vendorRefill = false; self.skipHardPull = false; end
+	if (GetLocalPlayer():GetLevel() < 3) then self.vendorRefill = false; end
+
+	if (GetLocalPlayer():GetLevel() < 8) then self.skipHardPull = false; end
 
 	self.drawEnabled = true;
 	script_helper:setup();

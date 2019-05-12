@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Gasai>
+	<Morph Count="9">
+		<Morph_0 name="T3 War" Modle="0" Mount="0" Head="22418" Shoulder="22419" Shirt="0" Chest="22416" Waist="22422" Legs="22417" Feet="22420" Wrist="22423" Hands="22421" Back="0" Mainhand="19019" Offhand="19019" Tabard="0"/>
+		<Morph_1 name="T3 Pally" Modle="0" Mount="0" Head="22428" Shoulder="22429" Shirt="0" Chest="22425" Waist="22431" Legs="22427" Feet="22430" Wrist="22424" Hands="22426" Back="0" Mainhand="22691" Offhand="23075" Tabard="0"/>
+		<Morph_2 name="T3 Mage" Modle="0" Mount="0" Head="22498" Shoulder="22499" Shirt="0" Chest="22496" Waist="22502" Legs="22497" Feet="22500" Wrist="22503" Hands="22501" Back="0" Mainhand="17182" Offhand="17182" Tabard="0"/>
+		<Morph_3 name="T3 Rogue" Modle="0" Mount="0" Head="22478" Shoulder="22479" Shirt="0" Chest="22476" Waist="22482" Legs="22477" Feet="22480" Wrist="22483" Hands="22481" Back="0" Mainhand="22691" Offhand="22691" Tabard="22999"/>
+		<Morph_4 name="T3 Druid" Modle="0" Mount="0" Head="22490" Shoulder="22491" Shirt="0" Chest="22488" Waist="22494" Legs="22489" Feet="22492" Wrist="22495" Hands="22493" Back="0" Mainhand="22632" Offhand="0" Tabard="22999"/>
+		<Morph_5 name="T3 Hunter" Modle="0" Mount="0" Head="22438" Shoulder="22439" Shirt="0" Chest="22436" Waist="22442" Legs="22437" Feet="22440" Wrist="22443" Hands="22441" Back="0" Mainhand="0" Offhand="0" Tabard="0"/>
+		<Morph_6 name="T3 Priest" Modle="0" Mount="0" Head="22514" Shoulder="22515" Shirt="0" Chest="22512" Waist="22518" Legs="22513" Feet="22516" Wrist="22519" Hands="22517" Back="0" Mainhand="22631" Offhand="0" Tabard="0"/>
+		<Morph_7 name="T3 Warlock" Modle="0" Mount="0" Head="22506" Shoulder="22507" Shirt="0" Chest="22504" Waist="22510" Legs="22505" Feet="22508" Wrist="22511" Hands="22509" Back="0" Mainhand="22630" Offhand="0" Tabard="0"/>
+		<Morph_8 name="T3 Shaman" Modle="0" Mount="0" Head="22466" Shoulder="22467" Shirt="0" Chest="22464" Waist="22470" Legs="22465" Feet="22468" Wrist="22471" Hands="22469" Back="0" Mainhand="17182" Offhand="17182" Tabard="0"/>
+	</Morph>
+</Gasai>
+

@@ -74,6 +74,9 @@ function coremenu:draw()
 		LoadScript("Logitech's Follower", "scripts\\script_follow.lua");
 		AddScriptToMode("Logitech's Follower", "script_follow");
 
+		LoadScript("Logitech's Rotation", "scripts\\script_rotation.lua");
+		AddScriptToMode("Logitech's Rotation", "script_rotation");
+
 		LoadScript("Fishing", "scripts\\script_fish.lua");
 		AddScriptToMode("Fishing", "script_fish");
 

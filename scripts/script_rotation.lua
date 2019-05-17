@@ -19,7 +19,8 @@ script_rotation = {
 }
 
 function script_rotation:setup()
-
+	script_helper:setup();
+	script_gather:setup();
 	DEFAULT_CHAT_FRAME:AddMessage('script_rotation: loaded...');
 
 	self.isSetup = true;
@@ -106,12 +107,8 @@ end
 function script_grind:mountUp()
 	local __, lastError = GetLastError();
 	if (lastError ~= 75) then
-		if(GetLocalPlayer():GetLevel() >= 40 and not IsSwimming() and not IsIndoors() and not IsMounted()) then
+		if(not IsSwimming() and not IsIndoors() and not IsMounted()) then
 			
-			if (not IsStanding()) then 
-				StopMoving(); 
-			end
-
 			if (script_helper:useMount()) then 
 				self.timer = GetTimeEX() + 4000; 
 				return true; 

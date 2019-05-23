@@ -7,6 +7,6 @@ https://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-emulator-se
 Scripts in this repository by Logitech2k17 @ OwnedCore
 
 Requirements
-- Nav Mesh Map Files : https://mega.nz/#!g0U2xI4a!aoJICAY34DLvM...Xz4J3rg9dM
+- Nav Mesh Map Files : https://mega.nz/#!g0U2xI4a!aoJICAY34DLvMnWPqgIqygDWIy_91tuoyXz4J3rg9dM
 - Visual C++ Redistributable for Visual Studio 2015 : https://www.microsoft.com/en-us/download/details.aspx?id=48145
 - DirectX End-User Runtime : https://www.microsoft.com/en-us/download/details.aspx?id=35

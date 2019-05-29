@@ -47,7 +47,6 @@ script_grind = {
 	talentLoaded = include("scripts\\script_talent.lua"),
 	vendorLoaded = include("scripts\\script_vendor.lua"),
 	gatherLoaded = include("scripts\\script_gather.lua"),
-	gather = include("scripts\\script_gather.lua"),
 	grindExtra = include("scripts\\script_grindEX.lua"),
 	grindMenu = include("scripts\\script_grindMenu.lua"),
 	aggroLoaded = include("scripts\\script_aggro.lua"),
@@ -223,7 +222,7 @@ function script_grind:run()
 		end
 		
 		-- Auto path: keep us inside the distance to the current hotspot, if mounted keep running even if in combat
-		if ((not IsInCombat() or IsMounted()) and self.autoPath and vendorStatus == 0 and
+		if ((not IsInCombat() or IsMounted()) and self.autoPath and script_vendor:getStatus() == 0 and
 			(script_nav:getDistanceToHotspot() > self.distToHotSpot or self.hotSpotTimer > GetTimeEX())) then
 			if (not (self.hotSpotTimer > GetTimeEX())) then self.hotSpotTimer = GetTimeEX() + 20000; end
 			if (script_grind:mountUp()) then return; end

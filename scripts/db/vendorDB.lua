@@ -62,7 +62,7 @@ function vendorDB:setup()
 	vendorDB:addVendor('Morhan Coppertongue', 0, 0, 38, true, false, false, false, false, -5343.68, -2932.13, 324.36); -- repair Lock Modan
 
 	-- Ally: Wetlands
-	vendorDB:addVendor('Gruham Rumbnul', 0, 0, 11, false, false, false, true, true, -3746.03, 888.59, 11.01); -- Ammo, Bullets, General
+	vendorDB:addVendor('Gruham Rumdnul', 0, 0, 11, false, false, false, true, true, -3746.03, 888.59, 11.01); -- Ammo, Bullets, General
 	vendorDB:addVendor('Murndan Derth', 0, 0, 11, true, false, false, false, false, -3790.13, -858.47, 11.60); -- Repair
 
 	-- Ally: Hillsbrad

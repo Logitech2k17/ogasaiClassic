@@ -72,7 +72,7 @@ function vendorDB:setup()
 	-- Tanaris - Ally + Horde
 	vendorDB:addVendor('Krinkle Goodsteel', 0, 1, 440, true, false, false, false, false, -7200.40, -3769.75, 8.68); -- Repair Vendor
 	vendorDB:addVendor('Krinkle Goodsteel', 1, 1, 440, true, false, false, false, false, -7200.40, -3769.75, 8.68); -- Repair Vendor
-	vendorDB:addVendor('Blizrlk Buckshot', 0, 1, 440, true, false, false, false, true, -7141.79, -3719.82, 8.49); -- Bullets (not arrows) ammo, repair
+	vendorDB:addVendor('Blizrik Buckshot', 0, 1, 440, true, false, false, false, true, -7141.79, -3719.82, 8.49); -- Bullets (not arrows) ammo, repair
 	
 	-- Azshara Alliance
 	vendorDB:addVendor('Brinna Valanaar', 0, 1, 16, true, false, false, true, false, 2691.28, -3885.87, 109.22); -- Repair + Arrows (no ammo)

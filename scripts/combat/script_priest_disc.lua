@@ -43,7 +43,7 @@ function script_priest:healAndBuff(targetObject, localMana)
 
 	-- Greater Heal
 	if (localMana > 20 and targetHealth < self.greaterHealHP) then
-		if (script_priest:heal('Heal', targetObject)) then
+		if (script_priest:heal('Greater Heal', targetObject)) then
 			return true;
 		end
 	end

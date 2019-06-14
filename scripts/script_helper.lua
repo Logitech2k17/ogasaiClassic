@@ -197,7 +197,7 @@ function script_helper:setup()
 	script_helper:addMount('Horn of the Swift Timber Wolf');
 	script_helper:addMount('Red Skeletal Warhorse');
 	script_helper:addMount('Reins of the Black War Tiger');
-	script_helper:addMount('Stormspike Battle Charger');
+	script_helper:addMount('Stormpike Battle Charger');
 	script_helper:addMount('Swift Blue Raptor');
 	script_helper:addMount('Swift Brown Ram');
 	script_helper:addMount('Swift Brown Steed');

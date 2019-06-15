@@ -56,6 +56,9 @@ function vendorDB:setup()
 	vendorDB:addVendor("William MacGregor", 0, 0, 40, true, false, false, true, false, -10658.5, 996.85, 32.87); -- rep, arrows
 	vendorDB:addVendor("Mike Miller", 0, 0, 40, false, true, false, false, false, -10653.3, 995.39, 32.87); -- bread
 
+	-- Ally: Stranglethorn Vale // Альянс: Тернистая долина
+	vendorDB:addVendor("Corporal Bluth", 0, 0, 33, false, true, true, true, true, -11295.8, -201.35, 75.6); -- drink, fruits, arrow, bullets // напитки, фрукты, стрелы, патроны
+	
 	-- Ally: Gnome & Dwarf
 	vendorDB:addVendor('Kreg Bilmn', 0, 0, 1, false, false, false, true, true, -5597.66, -521.85, 399.66); -- general bullets/ammo
 	vendorDB:addVendor('Grawn Thromwyn', 0, 0, 1, true, false, false, false, false, -5590.67, -428.415, 397.326); -- repair Northshire

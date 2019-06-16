@@ -53,11 +53,11 @@ function script_gather:setup()
 	script_gather:addHerb('Liferoot', 677, false, 150);
 	script_gather:addHerb('Fadeleaf', 697, false, 160);
 	script_gather:addHerb('Goldthorn', 698, false, 170);
-	script_gather:addHerb('Khadgars Whisker', 701, false, 185);
+	script_gather:addHerb("Khadgar's Whisker", 701, false, 185);
 	script_gather:addHerb('Wintersbite', 699, false, 195);
 	script_gather:addHerb('Firebloom', 2312, false, 205);
 	script_gather:addHerb('Purple Lotus', 2314, false, 210);
-	script_gather:addHerb('Arthas Tears', 2310, false, 220);
+	script_gather:addHerb("Arthas' Tears", 2310, false, 220);
 	script_gather:addHerb('Sungrass', 2315, false, 230);
 	script_gather:addHerb('Blindweed', 2311, false, 235);
 	script_gather:addHerb('Ghost Mushroom', 389, false, 245);

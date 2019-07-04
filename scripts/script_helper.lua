@@ -104,6 +104,7 @@ function script_helper:setup()
 	script_helper:addManaPotion("Minor Mana Potion");
 	script_helper:addManaPotion("Lesser Mana Potion");
 	script_helper:addManaPotion("Mana Potion");
+	script_helper:addManaPotion("Greater Mana Potion");
 	script_helper:addManaPotion("Superior Mana Potion");
 	script_helper:addManaPotion("Major Mana Potion");
 

@@ -26,7 +26,7 @@ function script_talent:setup()
 			"3;Conviction", "3;Conviction", "3;Conviction", "3;Conviction", "3;Conviction",
 			"3;Vindication", "3;Vindication", "3;Vindication",
 			"3;Deflection",
-			"3;Improved Retribution Aura",
+			"3;Improved Retribution Aura", "3;Improved Retribution Aura",
 			"3;Two-Handed Weapon Specialization", "3;Two-Handed Weapon Specialization", "3;Two-Handed Weapon Specialization",
 			"3;Deflection",
 			"3;Vengeance", "3;Vengeance", "3;Vengeance", "3;Vengeance", "3;Vengeance"

@@ -312,7 +312,7 @@ function script_paladin:run(targetGUID)
 
 			-- Check: Remove desease or poison
 			if (localObj:HasDebuff('Rabies') or localObj:HasDebuff('Poison') or localObj:HasDebuff('Fevered Fatigue')
-				or localObj:HasDebuff('Dark Sludge') or localObj:HasDebuff('Corrosive Poison') or localObj:HasDebuff('Slowing Poison')) then
+				or localObj:HasDebuff('Dark Sludge') or localObj:HasDebuff('Corrosive Poison') or localObj:HasDebuff('Toxic Saliva') or localObj:HasDebuff('Slowing Poison')) then
 				if(HasSpell('Cleanse')) then
 					if (Buff('Cleanse', localObj)) then 
 						self.message = 'Cleansing...'; 
